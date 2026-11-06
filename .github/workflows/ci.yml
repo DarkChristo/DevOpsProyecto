@@ -1,0 +1,33 @@
+name: CI del SRS (IEEE 830)
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validar-y-construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install pyyaml
+      - name: 1. Validar el SRS y los requisitos (errores fallan, pendientes avisan)
+        run: python scripts/validar_srs.py
+      - name: 2. Pruebas de aceptación sobre el esquema (criterios -> pruebas)
+        run: python -m unittest discover -s tests -v
+      - name: 3. Generar matriz de trazabilidad
+        run: python scripts/generar_trazabilidad.py
+      - name: 4. Construir el informe en Word
+        run: |
+          sudo apt-get update -y && sudo apt-get install -y pandoc
+          pandoc docs/SRS.md docs/trazabilidad.md -o SRS_Cigarreria_Alcala.docx --toc
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SRS_Cigarreria_Alcala
+          path: SRS_Cigarreria_Alcala.docx
+      - name: 5. Publicar versión al crear una etiqueta (v1.0, v1.1...)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with: { files: SRS_Cigarreria_Alcala.docx }
