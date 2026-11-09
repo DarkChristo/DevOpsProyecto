@@ -166,7 +166,7 @@ El aplicativo no incluirá:
 | Categoría profesional | Ingeniero de sistemas |
 | Responsabilidades | Diseñar y modelar la base de datos |
 | Información de contacto | +51 942108270 |
-| Aprobación | [Inserte aquí el texto] |
+| Aprobación | [Aprobado] |
 
 | Nombre | Juan Pablo Forero Botía |
 | --- | --- |
@@ -174,7 +174,7 @@ El aplicativo no incluirá:
 | Categoría profesional | Ingeniero de sistemas |
 | Responsabilidades | Especificar los requisitos del software |
 | Información de contacto | +53 3228423758 |
-| Aprobación | [Inserte aquí el texto] |
+| Aprobación | [Aprobado] |
 
 | Nombre | Luz Marina Botia Guerrero |
 | --- | --- |
